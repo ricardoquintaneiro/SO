@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
         printf("Exporte a variável SORTORDER na bash. export SORTORDER=D ou export SORTORDER=C.\n");
         return EXIT_FAILURE;
     }
-    if ((strcmp(sortorder, "C") != 0) && (strcmp(sortorder, "D") != 0))
+    if ((strcasecmp(sortorder, "C") != 0) && (strcasecmp(sortorder, "D") != 0))
     {
         printf("SORTORDER inválido.\n");
         return EXIT_FAILURE;
@@ -33,9 +33,9 @@ int main(int argc, char *argv[])
         {
             for (int j = k + 1; j < count; j++)
             {
-                if (strcmp(sortorder, "C") == 0)
+                if (strcasecmp(sortorder, "C") == 0)
                 {
-                    if (strcmp(palavras[k], palavras[j]) > 0)
+                    if (strcasecmp(palavras[k], palavras[j]) > 0)
                     {
                         strcpy(temp, palavras[k]);
                         strcpy(palavras[k], palavras[j]);
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                    if (strcmp(palavras[k], palavras[j]) < 0)
+                    if (strcasecmp(palavras[k], palavras[j]) < 0)
                     {
                         strcpy(temp, palavras[j]);
                         strcpy(palavras[j], palavras[k]);
