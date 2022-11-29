@@ -54,3 +54,5 @@ dkms.conf
 *.log
 .vscode/c_cpp_properties.json
 *.pdf
+*.o
+!*.*
