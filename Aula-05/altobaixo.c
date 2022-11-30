@@ -5,6 +5,10 @@
 
 int main(int argc, char *argv[])
 {
+    if (argc != 3) {
+        printf("Número errado de argumentos. Deve indicar o limite inferior e o limite superior.\n");
+        return EXIT_FAILURE;
+    }
     char *endarg;
     int liminf = strtod(argv[1], &endarg);
     if (endarg == argv[1] || *endarg != '\0')
@@ -18,8 +22,13 @@ int main(int argc, char *argv[])
         printf("Segundo limite inválido.\n");
         return EXIT_FAILURE;
     }
+    if (liminf > limsup)
+    {
+        printf("ERRO. Limite inferior maior do que limite superior.\n");
+        return EXIT_FAILURE;
+    } 
     srand(time(NULL));
-    int numero = (rand() % (limsup + abs(liminf)) - abs(liminf));
+    int numero = (rand() % (limsup - liminf + 1) + liminf);
     int tentativa = liminf - 1;
     int contagem = 0;
     while (tentativa != numero)

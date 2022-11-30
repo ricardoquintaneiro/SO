@@ -42,7 +42,7 @@ void listDir(char dirname[], char option)
             }
             else if (option == 'f')
             {
-                if (dent->d_type != DT_DIR)
+                if (dent->d_type == DT_REG)
                     printf("%s\n", dent->d_name);
             }
             else if (option == 'e')
@@ -67,15 +67,33 @@ void listDir(char dirname[], char option)
 int main(int argc, char *argv[])
 {
     int opt;
-    while ((opt = getopt(argc, argv, "d:e:f:")) != -1)
+    char option;
+    while ((opt = getopt(argc, argv, "de:f")) != -1)
     {
+        switch (opt)
+        {
+            case 'd':
+                option = 'd';
+                break;
+            case 'f':
+                option = 'f';
+                break;
+            default: /* '?' */
+                fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n",
+                        argv[0]);
+                exit(EXIT_FAILURE);
+        }
+
+
+
+
         if (opt == 'f' || opt == 'd' || opt == 'e')
         {
             listDir(optarg, opt);
         }
         else
         {
-            fprintf(stderr, "Usage: %s [-t nsecs] [-n] name\n",
+            fprintf(stderr, "Usage: %s [-f] [-d] [directories] \n",
                     argv[0]);
             exit(EXIT_FAILURE);
         }

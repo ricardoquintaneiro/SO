@@ -13,18 +13,21 @@ int main(int argc, char *argv[])
         printf("Exporte a variável SORTORDER na bash. export SORTORDER=D ou export SORTORDER=C.\n");
         return EXIT_FAILURE;
     }
-    if ((strcmp(sortorder, "C") != 0) && (strcmp(sortorder, "D") != 0))
+    if ((strcasecmp(sortorder, "C") != 0) && (strcasecmp(sortorder, "D") != 0))
     {
         printf("SORTORDER inválido.\n");
         return EXIT_FAILURE;
     }
-    for (int i = 1; i < argc; i++)
+
+    printf("Introduza as palavras (ENTER para terminar):\n");
+    while (1)
     {
-        if (isalpha(argv[i][0]))
-        {
-            strcpy(palavras[i - 1], argv[i]);
+        fgets(palavras[count], 100, stdin);
+        if (palavras[count][0] == '\n')
+            break;
+        palavras[count][strlen(palavras[count]) - 1] = '\0';
+        if (isalpha(palavras[count][0]))
             count++;
-        }
     }
 
     if (count > 0)
@@ -33,9 +36,9 @@ int main(int argc, char *argv[])
         {
             for (int j = k + 1; j < count; j++)
             {
-                if (strcmp(sortorder, "C") == 0)
+                if (strcasecmp(sortorder, "C") == 0)
                 {
-                    if (strcmp(palavras[k], palavras[j]) > 0)
+                    if (strcasecmp(palavras[k], palavras[j]) > 0)
                     {
                         strcpy(temp, palavras[k]);
                         strcpy(palavras[k], palavras[j]);
@@ -44,7 +47,7 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
-                    if (strcmp(palavras[k], palavras[j]) < 0)
+                    if (strcasecmp(palavras[k], palavras[j]) < 0)
                     {
                         strcpy(temp, palavras[j]);
                         strcpy(palavras[j], palavras[k]);
